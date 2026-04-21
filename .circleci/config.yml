@@ -8,6 +8,7 @@ jobs:
           path: tflint-output.json
           destination: tflint-artifact
 
+
   build:
     docker:
       - image: cimg/base:stable                   # similar to "image" in GitLab
