@@ -8,14 +8,6 @@ jobs:
           path: tflint-output.json
           destination: tflint-artifact
 
-
-  build:
-    docker:
-      - image: cimg/base:stable                   # similar to "image" in GitLab
-    steps:
-      - checkout
-      - run: echo "This is a build step"          # similar to "script" in GitLab
-
   test:
     docker:
       - image: cimg/base:stable
@@ -42,10 +34,16 @@ jobs:
 
 workflows:
   version: 2
-  django:
+  terraform:
     jobs:
-      - build
-      - test
-      - integration
+      - tflint
+      - test:
+          requires:
+            - tflint
+      - integration:
+          requires:
+            - test
       - prod:
           type: approval
+          requires:
+            - integration
