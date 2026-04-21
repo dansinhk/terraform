@@ -1,4 +1,13 @@
 jobs:
+  tflint:
+    machine: true
+    steps:
+      - checkout
+      - run: docker run --rm -v $(pwd):/data -t ghcr.io/terraform-linters/tflint --chdir=aws -f json | tee tflint-output.json
+      - store_artifacts:
+          path: tflint-output.json
+          destination: tflint-artifact
+
   build:
     docker:
       - image: cimg/base:stable                   # similar to "image" in GitLab
