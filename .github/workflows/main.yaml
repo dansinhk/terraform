@@ -6,6 +6,7 @@ on:
       - main
 
 jobs:
+
   tflint:
     runs-on: ubuntu-22.04
     steps:
@@ -26,6 +27,11 @@ jobs:
           name: TFLint
           path: tflint-output.json
         if: always()                        # what is this for?
+
+  build:
+    runs-on: ubuntu-22.04                    # similar to "image" in GitLab
+    steps:
+      - run: echo "This is a build step"
 
   test:
     runs-on: ubuntu-22.04
