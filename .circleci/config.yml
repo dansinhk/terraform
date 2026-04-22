@@ -7,7 +7,7 @@ jobs:
       - store_artifacts:
           path: terrascan-output.json
           destination: terrascan-artifact
-          when: always
+    when: always
 
   test:
     docker:
