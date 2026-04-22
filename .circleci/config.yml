@@ -4,10 +4,11 @@ jobs:
     steps:
       - checkout
       - run: docker run --rm -v $(pwd):/src tenable/terrascan scan -t aws -d /src/aws -o json | tee terrascan-output.json
+          when: always
       - store_artifacts:
           path: terrascan-output.json
           destination: terrascan-artifact
-    when: always
+    
 
   test:
     docker:
