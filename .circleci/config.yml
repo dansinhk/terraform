@@ -37,10 +37,10 @@ workflows:
   version: 2
   terraform:
     jobs:
-      - tflint
+      - terrascan
       - test:
           requires:
-            - tflint
+            - terrascan
       - integration:
           requires:
             - test
